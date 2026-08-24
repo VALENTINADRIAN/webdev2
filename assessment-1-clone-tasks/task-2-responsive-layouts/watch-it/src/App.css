@@ -1,0 +1,212 @@
+/* --- BRAND COLOURS & TYPOGRAPHY --- */
+:root {
+  --clr-void: #070410;   
+  --clr-teal: #4DCCBD;   
+  --clr-snow: #FFFFFF;   
+  
+  --font-primary: 'Lato', sans-serif;
+  --font-display: 'Teko', sans-serif;
+  
+  /* Mobile spacing defaults */
+  --spacing-small: 16px; 
+  --spacing-large: 16px; 
+}
+
+/* Tablet Breakpoint */
+@media (min-width: 720px) { 
+  :root {
+    --spacing-large: 32px;
+  }
+}
+
+/* Desktop Breakpoint */
+@media (min-width: 1024px) { 
+  :root {
+    --spacing-large: 48px;
+  }
+}
+
+body {
+  margin: 0;
+  background-color: var(--clr-void);
+  color: var(--clr-snow);
+  font-family: var(--font-primary);
+}
+
+/* --- LAYOUT WRAPPERS --- */
+.content-bounds {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: var(--spacing-large); 
+  box-sizing: border-box;
+}
+
+/* --- HEADER NAVIGATION --- */
+.top-navigation {
+  background-color: var(--clr-snow);
+  color: var(--clr-void);
+}
+
+.header-bounds {
+  max-width: 900px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--spacing-small); 
+}
+
+.brand-logo {
+  font-family: var(--font-display);
+  font-size: 2em; 
+  margin: 0;
+  color: var(--clr-void);
+}
+
+.desktop-links {
+  display: none; 
+}
+
+.search-btn {
+  font-family: var(--font-display);
+  font-size: 2em;
+  background-color: transparent;
+  color: var(--clr-void);
+  border: 2px solid var(--clr-void);
+  border-radius: var(--spacing-small);
+  padding: 0 var(--spacing-small);
+  cursor: pointer;
+  line-height: 1.2;
+}
+
+@media (min-width: 720px) {
+  .brand-logo { 
+    font-size: 3em; 
+  }
+  .desktop-links {
+    display: flex;
+    gap: var(--spacing-large);
+  }
+  .desktop-links a {
+    color: var(--clr-void);
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 1.1em;
+  }
+}
+
+/* --- MOVIE GRID SYSTEM --- */
+.catalog-grid {
+  display: grid;
+  grid-template-columns: 1fr; 
+  gap: var(--spacing-large); 
+}
+
+@media (min-width: 720px) {
+  .catalog-grid {
+    grid-template-columns: repeat(2, 1fr); 
+  }
+}
+
+/* --- CARD COMPONENTS --- */
+.film-item {
+  background-color: var(--clr-void);
+  border: 2px solid var(--clr-teal); 
+  padding: var(--spacing-small); 
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-small); 
+}
+
+.film-poster {
+  width: 100%;
+  aspect-ratio: 1/1;
+  object-fit: cover;
+}
+
+.film-details {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  justify-content: space-between;
+}
+
+.film-heading {
+  font-family: var(--font-display);
+  font-size: 1.5em; 
+  margin: 0 0 10px 0;
+  color: var(--clr-teal); 
+}
+
+.film-desc {
+  margin: 0 0 15px 0;
+  line-height: 1.5;
+}
+
+.watch-action-btn {
+  font-family: var(--font-display);
+  font-size: 2em; 
+  background-color: var(--clr-teal);
+  color: var(--clr-void);
+  border: none;
+  padding: var(--spacing-small); 
+  border-radius: var(--spacing-small); 
+  cursor: pointer;
+  width: 100%;
+  line-height: 1;
+}
+
+/* --- DESKTOP WIREFRAME LAYOUT --- */
+@media (min-width: 1024px) {
+  .catalog-grid {
+    grid-template-columns: repeat(2, 1fr); 
+  }
+
+  /* 1. Item 1 uses full width hero banner */
+  .film-item:nth-child(1) {
+    grid-column: 1 / -1;
+  }
+  .film-item:nth-child(1) .film-details {
+    flex-direction: row;
+    align-items: flex-end;
+    gap: var(--spacing-large);
+  }
+  .film-item:nth-child(1) .text-wrap {
+    flex-grow: 1;
+  }
+  .film-item:nth-child(1) .watch-action-btn {
+    width: auto;
+    padding: var(--spacing-small) 40px;
+  }
+
+  /* 2. Items 2 and 3 use a standard 2-column side-by-side vertical cards */
+  .film-item:nth-child(2),
+  .film-item:nth-child(3) {
+    grid-column: span 1;
+    flex-direction: column;
+  }
+  .film-item:nth-child(2) .watch-action-btn,
+  .film-item:nth-child(3) .watch-action-btn {
+    width: 100%;
+  }
+
+  /* 3. Items 4, 5, and 6 utilised full-width horizontal rows */
+  .film-item:nth-child(n+4) {
+    grid-column: 1 / -1;
+    flex-direction: row;
+  }
+  .film-item:nth-child(n+4) .film-poster {
+    width: 35%;
+    aspect-ratio: auto; 
+    margin-bottom: 0;
+  }
+  .film-item:nth-child(n+4) .film-details {
+    width: 65%;
+    align-items: flex-start;
+  }
+  .film-item:nth-child(n+4) .watch-action-btn {
+    width: auto;
+    padding: var(--spacing-small) 40px;
+    align-self: flex-end;
+  }
+}
